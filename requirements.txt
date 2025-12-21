@@ -1,0 +1,43 @@
+# Core dependencies
+openai
+pydantic
+python-dotenv
+typeguard
+
+# Server
+fastapi
+uvicorn
+
+# HTTP & web scraping
+requests
+beautifulsoup4
+lxml
+httpx
+
+# Data processing & manipulation
+pandas
+numpy
+openpyxl
+PyMuPDF
+Pillow
+
+# Data visualization
+matplotlib
+seaborn
+
+# Utilities
+more-itertools
+python-dateutil
+pytz
+
+# Output formatting
+rich
+tabulate
+
+# Machine Learning (optional, commonly used)
+scikit-learn
+
+# Other
+erc3>=1.2.0
+tavily-python
+pytesseract
