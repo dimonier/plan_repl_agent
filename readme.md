@@ -2,6 +2,16 @@
 
 # how to run:
 
+## Configuration (Required)
+
+Create `.env` file with `OPENROUTER_API_KEY` and LLM model overrides based on .env.example:
+
+- **OPENROUTER_API_KEY**: required
+- **LLM_MODEL_PLAN**: optional (default: `openai/gpt-4.1`)
+- **LLM_MODEL_DECISION**: optional (default: `openai/gpt-4.1`)
+- **LLM_MODEL_REPLAN**: optional (default: `openai/gpt-4.1`)
+- **LLM_MODEL_AGENT**: optional (default: `deepseek/deepseek-v3.2`)
+
 ## Step 1: Start Docker server (required)
 
 ```bash
@@ -49,17 +59,26 @@ pip install -r requirements.txt
 python runner.py
 ```
 
-## Configuration
+## Step 3: Run a Task
 
-Create `.env` file with `OPENROUTER_API_KEY` and (optionally) LLM model overrides:
+Specify a task file using the `-i` option:
 
-- **OPENROUTER_API_KEY**: required
-- **LLM_MODEL_PLAN**: optional (default: `openai/gpt-4.1`)
-- **LLM_MODEL_DECISION**: optional (default: `openai/gpt-4.1`)
-- **LLM_MODEL_REPLAN**: optional (default: `openai/gpt-4.1`)
-- **LLM_MODEL_AGENT**: optional (default: `deepseek/deepseek-v3.2`)
+```bash
+# Run with a specific task file
+python runner.py -i task_sample.txt
 
-Edit `runner.py` to specify your task (see task_sample variable as example).
+# Or using uv
+uv run runner.py -i task_sample.txt
+
+# Run without arguments (uses default test task)
+python runner.py
+```
+
+**Sample task files** (examples in project root):
+- `test.txt` - test FTA (Flat Table Analysis) tool
+- `task*.txt` - task files with task descriptions
+
+**Create your own task**: simply create a `.txt` file with your task description and pass it via `-i`.
 
 # to see how agent works:
 [youtube](https://www.youtube.com/watch?v=6erdpQyXLaI)  
