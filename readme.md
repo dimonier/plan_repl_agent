@@ -21,6 +21,14 @@ docker compose build
 docker compose up -d
 ```
 
+these 3 folders should be read/write for agent. agent uid/guid is 1000.
+```bash
+cd plan_repl_agent
+chown -R 1000:1000 ./plan_repl_agent/lib
+chown -R 1000:1000 ./plan_repl_agent/logs
+chown -R 1000:1000 ./plan_repl_agent/work
+```
+
 ## Step 2: Run a Task
 
 Specify a task file using the `-i` option:
