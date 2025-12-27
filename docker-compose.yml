@@ -23,15 +23,16 @@ services:
       - PIP_NO_WARN_SCRIPT_LOCATION=1
       # Matplotlib config in writable location in lib/
       - MPLCONFIGDIR=/app/lib/.matplotlib
+      
     # Resource limits
-    deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 2G
-        reservations:
-          cpus: '0.5'
-          memory: 512M
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '2.0'
+    #       memory: 2G
+    #     reservations:
+    #       cpus: '0.5'
+    #       memory: 512M
     # Network restrictions (optional)
     # network_mode: "none"  # Uncomment to disable network
     
