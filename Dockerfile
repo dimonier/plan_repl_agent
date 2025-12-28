@@ -2,7 +2,7 @@ FROM python:3.13
 
 WORKDIR /app
 
-ENV HOME=/app
+# --- System env ---
 ENV VIRTUAL_ENV=/app/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
@@ -18,20 +18,22 @@ RUN groupadd -g 1000 agent \
  && useradd -u 1000 -g agent -m agent
 
 # --- Prepare app dirs and ownership ---
-RUN mkdir -p /app/venv /app/work /app/logs \
+RUN mkdir -p /app/venv /app/work /app/logs /app/home \
  && chown -R agent:agent /app
 
-# --- Create venv ---
-RUN python -m venv $VIRTUAL_ENV \
- && $VIRTUAL_ENV/bin/pip install --upgrade pip
+# --- Switch to non-root BEFORE venv ---
+USER agent
+ENV HOME=/app/home
 
-# --- Python deps ---
+# --- Create venv as agent ---
+RUN python -m venv $VIRTUAL_ENV \
+ && pip install --upgrade pip
+
+# --- Python deps (installed into venv as agent) ---
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# --- Runtime: non-root ---
-USER agent
-
+# --- Runtime env ---
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 
