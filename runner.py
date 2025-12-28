@@ -32,9 +32,11 @@ def reset() -> dict:
 task = """
 
 create doc.txt in CWD
+install more itertools
+insert some demo code usage for more itertools in doc.txt.
 
 """.strip()
 
-run_task(task)
-time.sleep(0.5)
+# run_task(task)
+# time.sleep(2)
 print(list_tasks())
