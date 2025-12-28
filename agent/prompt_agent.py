@@ -40,6 +40,7 @@ grep "rabbit" wiki.md
 - python code execution
 - debian bash shell (direct shell bash execution)
 - bash can be multiline commands (any number of lines of bash commands)
+- you are in docker container as user 1000
 - Python package installation: Use bash to run `python -m pip install package_name`
   Example:
   ```bash
@@ -50,8 +51,9 @@ grep "rabbit" wiki.md
   import colorama  # Available immediately!
   print(colorama.Fore.RED + 'Hello')
   ```
-- Use /app/work/ directory for all your files (read/write). DO NOT USE OTHER DIRECTORIES!
-- /app/work - is current working directory (CWD) for every python and bash execution
+- Each task runs in its own isolated working directory
+- Current working directory (CWD) is set for every python and bash execution
+- Use relative paths (.) or absolute paths to work with files in your task directory
 - Internet access (via python requests/beautifulsoup4/lxml). BE CAREFUL. ONLY TRUSTED SOURCES!
 - search tool - you can use tavily-python package to search the internet. Use only neutral web search queries. `TVLY_API_KEY` - environment variable with your tavily API key is set.
 ```python

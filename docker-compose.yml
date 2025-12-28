@@ -8,6 +8,7 @@ services:
       - ./agent:/app/agent  # Agent code (auto-reload if enabled)
       - ./work:/app/work  # Work dir for agent files (clean user space)
       - ./logs:/app/logs  # Logs visible on host
+      - ./agent_spool:/app/agent_spool  # Spool dir for agent files (clean user space)
       - agent-venv:/app/venv  # Named volume (preserves venv between rebuilds)
     env_file:
       - .env

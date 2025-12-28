@@ -23,7 +23,7 @@ active_processes: Dict[str, subprocess.Popen] = {}  # task_id -> Popen
 active_processes_lock = threading.Lock()
 
 # Spool directory for worker I/O
-SPOOL_DIR = Path("/tmp/agent_spool")
+SPOOL_DIR = Path("/app/agent_spool")
 MAX_CONCURRENT = 4
 
 # Supervisor thread

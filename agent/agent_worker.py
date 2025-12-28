@@ -30,7 +30,7 @@ def main():
         task = data["task"]
         
         # Change to work directory for agent file operations
-        work_dir = Path(__file__).parent.parent / "work"
+        work_dir = Path(__file__).parent.parent / "work" / task_id
         work_dir.mkdir(exist_ok=True)
         os.chdir(work_dir)
         

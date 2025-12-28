@@ -34,6 +34,7 @@ Create plan to achieve the following task:
 - pip install package_name
 - internet (curl, requests etc)
 - files system, files read/write, CWD
+- you are in docker container as user 1000
 
 """.strip()
 

@@ -1,4 +1,4 @@
-import sys
+import os
 import io
 import traceback
 from contextlib import redirect_stdout, redirect_stderr
@@ -15,10 +15,6 @@ class CodeResponse(BaseModel):
     globals: dict = None
 
 def execute_python(code: str):
-    import os
-
-    os.chdir('/app/work')
-    
     stdout_capture = io.StringIO()
     stderr_capture = io.StringIO()
     
@@ -40,14 +36,12 @@ def execute_python(code: str):
 
 
 def execute_bash(code: str) -> CodeResponse:
-    import os
-    
     try:
         result = subprocess.run(
             ['bash', '-c', code],
             capture_output=True,
             text=True,
-            cwd='/app/work',
+            cwd=os.getcwd(),  # Use current working directory
             timeout=60,
         )
         return CodeResponse(

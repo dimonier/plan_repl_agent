@@ -21,29 +21,11 @@ docker compose build
 docker compose up -d
 ```
 
-these 3 folders should be read/write for agent. agent uid/guid is 1000.
-```bash
-cd plan_repl_agent
-chown -R 1000:1000 ./plan_repl_agent/lib
-chown -R 1000:1000 ./plan_repl_agent/logs
-chown -R 1000:1000 ./plan_repl_agent/work
-```
-
 ## Step 2: Run a Task
 
-Specify a task file using the `-i` option:
-
 ```bash
-# Run with a specific task file
-python runner.py -i task_sample.txt
-
-# Run without arguments (uses default test task)
-python runner.py
+python runner.py  # task could be inserted inside
 ```
-
-**Sample task files** (examples located in `tasks` folder):
-
-**Create your own task**: simply create a `.txt` file with your task description and pass it via `-i`.
 
 # to see how agent works:
 [youtube](https://www.youtube.com/watch?v=6erdpQyXLaI)  
@@ -55,25 +37,21 @@ python runner.py
 
 
 # files and folders overview
-- `/agent` - main code (runs in Docker server)
-- `/lib` - technical folder for agent, related to dynamic `pip install` functionality during execution  
-- `/logs` - all steps with detailed thinking process, shows agent logic, logs based on .txt files  
+- `/agent` - main code (runs in Docker)
+- `/logs` - all steps with detailed thinking process, shows agent logic
 - `/work` - agent working directory, for file operations  
-- `/tasks` - one file for each task
-- `/runner.py` - client to start agent (connects to Docker server)
+- `/runner.py` - client to start agent (get/post to Docker)
 - `requirements.txt` - will be installed in docker (will be used by agent)
 
 
 # important notes
-- **architecture**: Docker container = agent server (required), `runner.py` = client
-- agent runs in docker container, non-root user
+- **architecture**: Docker container = agent server (required), `runner.py` = simple client
+- agent runs in docker container, non-root user (1000)
 - agent can execute any python and bash commands (**take into account security issues**)
 - agent can dynamically pip install packages during execution (inside docker container)
-- agent cannot apt-get ...
+- agent cannot apt-get  
 
 # windows
-preferably run linux to run agent (i used ubuntu 24)   
-if run on windows:  
 need to install docker desktop for windows
 
 # log time zone
