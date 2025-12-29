@@ -22,6 +22,7 @@ docker compose up -d
 
 chown -R 1000:1000 ./
 ```
+<!-- git config --global --add safe.directory /root/plan_repl_agent -->
 
 ## Step 2: Run a Task
 
