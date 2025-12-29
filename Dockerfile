@@ -18,7 +18,7 @@ RUN groupadd -g 1000 agent \
  && useradd -u 1000 -g agent -m agent
 
 # --- Prepare app dirs and ownership ---
-RUN mkdir -p /app/venv /app/work /app/logs /app/home /app/agent_spool \
+RUN mkdir -p /app/work /app/logs /app/home /app/agent_spool \
  && chown -R agent:agent /app
 
 # --- Switch to non-root BEFORE venv ---
@@ -27,7 +27,8 @@ ENV HOME=/app/home
 
 # --- Create venv as agent ---
 RUN python -m venv $VIRTUAL_ENV \
- && pip install --upgrade pip
+ && pip install --upgrade pip \
+ && chown -R agent:agent $VIRTUAL_ENV
 
 # --- Python deps (installed into venv as agent) ---
 COPY requirements.txt .

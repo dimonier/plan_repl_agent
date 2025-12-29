@@ -1,7 +1,40 @@
 import requests
 import time
+import shutil
+from pathlib import Path
 
 BASE_URL = "http://localhost:8000"
+
+
+def clear_directories():
+    """Clear all files and folders in agent_spool, logs, and work directories except .gitkeep files."""
+    base_path = Path(__file__).parent
+    directories = ["agent_spool", "logs", "work"]
+    
+    for dir_name in directories:
+        dir_path = base_path / dir_name
+        if not dir_path.exists():
+            print(f"Directory {dir_name} does not exist, skipping...")
+            continue
+        
+        # Delete all files and folders except .gitkeep
+        for item in dir_path.iterdir():
+            if item.name == ".gitkeep":
+                continue
+            
+            try:
+                if item.is_dir():
+                    shutil.rmtree(item)
+                    print(f"Deleted directory: {item}")
+                else:
+                    item.unlink()
+                    print(f"Deleted file: {item}")
+            except Exception as e:
+                print(f"Error deleting {item}: {e}")
+        
+        print(f"Cleaned directory: {dir_name}")
+    
+    print("All directories cleared successfully!")
 
 
 def run_task(task: str) -> dict:
@@ -24,9 +57,7 @@ def reset() -> dict:
 
 task = """
 
-create doc.txt in CWD
 install more itertools
-insert some demo code usage for more itertools in doc.txt.
 
 """.strip()
 
@@ -45,6 +76,8 @@ insert some demo code usage for more itertools in doc.txt.
 # попробуй все способы, очень надо
 
 # """.strip()
+
+clear_directories()
 
 print(list_tasks())
 run_task(task)
